@@ -3,72 +3,72 @@ import userModel from '../models/user.model.js';
 import genToken from '../config/token.js';
 
 export const registerController = async (req, res) => {
-    // after making all validations we register the user
-    // while registering we will hash the password
-
     try {
         const { username, email, password } = req.body;
-        //validations
-        // these valiations could alos be removed and kept only in the client side
+
+        // Validations
         if (!username) {
-            return res.send({ message: "userName is Required" });
+            return res.status(400).send({ success: false, message: "Username is required" });
         }
         if (!email) {
-            return res.send({ message: "Email is Required" });
+            return res.status(400).send({ success: false, message: "Email is required" });
         }
         if (!password) {
-            return res.send({ message: "Password is Required" });
+            return res.status(400).send({ success: false, message: "Password is required" });
         }
-        if (password.lenght < 6) {
-            return res.send({ message: "Password should be atleast of 6 charcters" })
+        if (password.length < 6) {
+            return res.status(400).send({ success: false, message: "Password should be at least 6 characters long" });
         }
-        //check user
-        const exisitingUser = await userModel.findOne({ email });
-        //exisiting user
-        if (exisitingUser) {
-            return res.status(200).send({
+
+        // Check if user already exists
+        const existingUser = await userModel.findOne({ email });
+        if (existingUser) {
+            return res.status(409).send({ // 409 = Conflict
                 success: false,
-                message: "Already Register please login",
+                message: "User already registered. Please login.",
             });
         }
-        //register user
+
+        // Hash password
         const hashedPassword = await bcrypt.hash(password, 10);
-        // Higher rounds = more computation = stronger encryption.
-        //save
+
+        // Save new user
         const user = await new userModel({
             username,
             email,
             password: hashedPassword,
         }).save();
 
-
-        //now generate token
+        // Generate token
         const token = genToken(user._id);
-        // now store this token in cookies
+
+        // Set token in HTTP-only cookie
         res.cookie("token", token, {
-            //  This sets a cookie in the browser named "token" and stores the value of token (like a login key or JWT).
-            httponly: true,//When the cookie is set with it, JavaScript can’t read it at all: console.log(document.cookie); // token not shown!
+            httpOnly: true,
+            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+            sameSite: "None",
+            secure: process.env.NODE_ENV === "production", // Set true in production
+        });
 
-            maxAge: 7 * 24 * 60 * 60 * 1000,
-            sameSite: "None",//Useful when your frontend & backend are on different domains. This controls when cookies are sent in cross-site requests (like from another domain or frontend).
-            secure: false
-        })
+        // Remove password from response
+        const { password: pw, ...userData } = user._doc;
 
+        // Send response
         res.status(201).send({
             success: true,
-            message: "User Register Successfully",
-            user,
+            message: "User registered successfully",
+            user: userData,
         });
+
     } catch (error) {
-        console.log(error);
+        console.error("Register Error:", error);
         res.status(500).send({
             success: false,
-            message: "Error in Registeration",
-            error,
+            message: "Error in registration",
+            error: error.message,
         });
     }
-}
-
+};
 
 export const loginController = async (req, res) => {
     try {
