@@ -2,8 +2,9 @@ import express from 'express';
 import connectDB from './config/db.js';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import authRoute from './routes/auth.route.js';
+import authRouter from './routes/auth.route.js';
 import cookieParser from 'cookie-parser';
+import userRouter from './routes/user.route.js';
 
 dotenv.config();
 connectDB();
@@ -22,7 +23,8 @@ app.use(express.json());//whenver we take data from body as post requst we need 
 app.use(cookieParser());
 
 // routes
-app.use('/api/v1/auth', authRoute);
+app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/user', userRouter);
 
 
 app.listen(port, () => {
