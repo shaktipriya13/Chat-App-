@@ -3,8 +3,8 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { serverUrl } from '../main';
-// import { useDispatch } from 'react-redux';
-// import { setSelectedUser, setUserData } from '../redux/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserData } from '../redux/user.slice.js';
 
 function Login() {
     const navigate = useNavigate();
@@ -13,7 +13,9 @@ function Login() {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [err, setErr] = useState("");
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
+    const { userData } = useSelector(state => state.user);
+    console.log(userData);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -22,7 +24,7 @@ function Login() {
             const result = await axios.post(`${serverUrl}/api/v1/auth/login`, {
                 email, password
             }, { withCredentials: true });
-            // dispatch(setUserData(result.data));
+            dispatch(setUserData(result.data));
             // dispatch(setSelectedUser(null));
             navigate("/");
             setEmail("");

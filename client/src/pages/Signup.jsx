@@ -2,13 +2,14 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { serverUrl } from '../main';
-// import { useDispatch } from 'react-redux';
-// import { setUserData } from '../redux/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserData } from '../redux/user.slice.js';
 
 function SignUp() {
     const navigate = useNavigate();
-    // const dispatch = useDispatch();
-
+    const dispatch = useDispatch();//useDispathc will return a fxn to dispatch
+    const { userData } = useSelector(state => state.user);//using useSelector hook to get data
+    console.log(userData);
     const [show, setShow] = useState(false);
     const [username, setUserName] = useState('');
     const [email, setEmail] = useState('');
@@ -29,7 +30,9 @@ function SignUp() {
                     // Aur yeh sab hone ke baad response`result` variable me store hota hai.
                 }
             );
-            // dispatch(setUserData(result.data));
+            dispatch(setUserData(result.data));//jo signup krne ke bad data aayega result me wo data dal diya humne
+            // jis reducer fxn ko change krna ha pass it in dispatch
+            // so as we signup that data will come in the reducer fxn and get stored in the state
             navigate('/profile');
             setEmail('');
             setPassword('');
