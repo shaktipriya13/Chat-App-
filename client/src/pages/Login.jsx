@@ -14,8 +14,6 @@ function Login() {
     const [loading, setLoading] = useState(false);
     const [err, setErr] = useState("");
     const dispatch = useDispatch();
-    const { userData } = useSelector(state => state.user);
-    console.log(userData);
 
     const handleLogin = async (e) => {
         e.preventDefault();

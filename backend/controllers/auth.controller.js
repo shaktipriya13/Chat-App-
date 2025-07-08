@@ -46,8 +46,9 @@ export const registerController = async (req, res) => {
         res.cookie("token", token, {
             httpOnly: true,
             maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-            sameSite: "None",
-            secure: process.env.NODE_ENV === "production", // Set true in production
+            sameSite: "Strict",
+            // secure: process.env.NODE_ENV === "production", // Set true in production
+            secure: false
         });
 
         // Remove password from response
@@ -104,7 +105,7 @@ export const loginController = async (req, res) => {
             httponly: true,//When the cookie is set with it, JavaScript can’t read it at all: console.log(document.cookie); // token not shown!
 
             maxAge: 7 * 24 * 60 * 60 * 1000,
-            sameSite: "None",//Useful when your frontend & backend are on different domains. This controls when cookies are sent in cross-site requests (like from another domain or frontend).
+            sameSite: "Strict",//should be none when your frontend & backend are on different domains. This controls when cookies are sent in cross-site requests (like from another domain or frontend).
             secure: false
         })
 
