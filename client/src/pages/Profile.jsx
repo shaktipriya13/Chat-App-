@@ -33,7 +33,7 @@ function Profile() {
             if (backendImage) {
                 formData.append("image", backendImage);
             }
-            let result = await axios.put(`${serverUrl}/api/user/profile`, formData, { withCredentials: true });
+            let result = await axios.put(`${serverUrl}/api/v1/user/profile`, formData, { withCredentials: true });
             setSaving(false);
             dispatch(setUserData(result.data));
             navigate("/");
@@ -63,6 +63,8 @@ function Profile() {
 
             <form className='w-[95%] max-w-[500px] flex flex-col gap-[20px] items-center justify-center' onSubmit={handleProfile}>
                 <input type="file" accept='image/*' ref={image} hidden onChange={handleImage} />
+                {/* above input field is to accept only images: image/* means it can accept all kind of images
+                 */}
 
                 <input
                     type="text"

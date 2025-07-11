@@ -1,0 +1,1 @@
+// we will be storing images we got in frontend in the public folder and upload them on cloudinary and the delete the image once they are uploaded on cloudinary
