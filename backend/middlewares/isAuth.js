@@ -9,7 +9,7 @@
 
 import jwt from 'jsonwebtoken';
 
-const isAuth = async (req, res) => {
+const isAuth = async (req, res, next) => {
     try {
         // we have to taken token from request body and extract id from it
         let token = req.cookies.token;
@@ -21,7 +21,7 @@ const isAuth = async (req, res) => {
 
         console.log(verifyToken);
         req.userId = verifyToken.userId;//jo bhi user id we are getiting from cookies we are storing it in req.userId
-        
+
         next();// If everything is okay, this moves the request to the next middleware or route.
     } catch (err) {
         return res.status(500).json({ message: `isAuth error: ${err}` });

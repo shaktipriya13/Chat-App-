@@ -1,3 +1,5 @@
+// userSlice me jo bhi user ke related data hoga whi store hoga 
+
 // createSlice is a fxn in which we pass an object having many properties, we set name and initial state of slice
 // we can make many states in this slice and set their iniital values
 // for diff states we can make diff. reducer fxns to change their states
@@ -8,14 +10,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const userSlice = createSlice({
-    name: "user",
+    name: "user",//this is the name of slice
     initialState: {
-        userData: null
+        // initialState me we can make many states using commas
+        userData: null,
+
     },
-    reducers: {
+    reducers: {//reducer are fxns that change the value of declared states in initialState
         setUserData: (state, action) => {
             state.userData = action.payload;//eg : we sent setUserDate("shakti")
-        }
+            // state ke through we access data stored in that state
+        },
     }
 })
 

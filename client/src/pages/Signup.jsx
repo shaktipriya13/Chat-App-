@@ -6,10 +6,15 @@ import { useDispatch } from 'react-redux';
 import { setUserData } from '../redux/user.slice.js';
 
 function SignUp() {
+    // following are useNavigate and useDispatch hooks
     const navigate = useNavigate();
     const dispatch = useDispatch();//useDispathc will return a fxn to dispatch
     // const { userData } = useSelector(state => state.user);//using useSelector hook to get data
     // console.log(userData);
+    // * to access data ,we hav to use the useSelector hook. for this first we need to go to the particular slice and then find up the exact state
+    // let { userData } = useSelector(state => state.user);//userSlice ki data is stored in the userData
+    // console.log(userData);
+
     const [show, setShow] = useState(false);
     const [username, setUserName] = useState('');
     const [email, setEmail] = useState('');
@@ -27,10 +32,11 @@ function SignUp() {
                 {
                     withCredentials: true
                     // ka matlab hai browser cookies ko bhi bhejega/ request me include karega.
-                    // Aur yeh sab hone ke baad response`result` variable me store hota hai.
+                    // Aur yeh sab hone ke baad response `result` variable me store hota hai.
                 }
             );
-            dispatch(setUserData(result.data));//jo signup krne ke bad data aayega result me wo data dal diya humne
+            dispatch(setUserData(result.data));//inside dipatch fxn we pass a reducer- setUserData
+            //jo signup krne ke bad data aayega result me wo data dal diya humne
             // jis reducer fxn ko change krna ha pass it in dispatch
             // so as we signup that data will come in the reducer fxn and get stored in the state
             navigate('/profile');

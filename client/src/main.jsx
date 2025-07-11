@@ -9,6 +9,7 @@ import { store } from './redux/store.js';
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <Provider store={store}>
+      {/* Provider store ko app me har jagah provide kr dega  */}
       {/* provide here the store u hav created */}
       <App />
     </Provider>

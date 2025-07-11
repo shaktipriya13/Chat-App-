@@ -30,3 +30,4 @@ app.use('/api/v1/user', userRouter);
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 })
+
