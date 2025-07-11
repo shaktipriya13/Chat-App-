@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-// import dp from "../assets/dp.webp";
+import dp from "../assets/dp.jpg";
 import { IoCameraOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from 'react-redux';
 import { IoIosArrowRoundBack } from "react-icons/io";
@@ -56,7 +56,8 @@ function Profile() {
                     <img src={frontendImage} alt="" className='h-full' />
                 </div>
                 <div className='absolute bottom-4 right-4 w-[35px] h-[35px] rounded-full bg-[#FFA500] flex justify-center items-center shadow-lg'>
-                    <IoCameraOutline className='text-white w-[25px] h-[25px]' />
+                    <IoCameraOutline className='text-white w-[25px] h-[25px]' title="Upload Photo" />
+
                 </div>
             </div>
 
@@ -74,16 +75,17 @@ function Profile() {
                 <input
                     type="text"
                     readOnly
-                    className='w-[90%] h-[50px] outline-none border-2 border-[#FFA500] px-[20px] py-[10px] bg-[#FFDAB9] rounded-lg shadow-md text-gray-600 text-[19px]'
-                    value={userData?.userName}
+                    className="w-[90%] h-[50px] outline-none border-2 border-[#FFA500] px-[20px] py-[10px] bg-[#FFDAB9] rounded-lg shadow-md text-gray-600 text-[19px]"
+                    value={userData?.username}
                 />
 
                 <input
                     type="email"
                     readOnly
-                    className='w-[90%] h-[50px] outline-none border-2 border-[#FFA500] px-[20px] py-[10px] bg-[#FFDAB9] rounded-lg shadow-md text-gray-600 text-[19px]'
+                    className="w-[90%] h-[50px] outline-none border-2 border-[#FFA500] px-[20px] py-[10px] bg-[#FFDAB9] rounded-lg shadow-md text-gray-600 text-[19px]"
                     value={userData?.email}
                 />
+
 
                 <button
                     className='px-[20px] py-[10px] bg-[#FF8C00] hover:bg-[#FF7F50] text-white rounded-2xl shadow-lg text-[20px] w-[200px] mt-[20px] font-semibold transition-all duration-200'
