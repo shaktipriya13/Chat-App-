@@ -105,7 +105,7 @@ function MessageArea() {
             {!selectedUser &&
                 <div className='w-full h-full flex flex-col justify-center items-center'>
                     <h1 className='text-gray-700 font-bold text-[50px]'>Welcome to PingDrop</h1>
-                    <span className='text-gray-700 font-semibold text-[30px]'>Chat Friendly !</span>
+                    <span className='text-gray-700 font-semibold text-[30px]'>-Where Ping Becomes Conversation !</span>
                 </div>}
 
 

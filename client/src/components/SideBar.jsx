@@ -96,6 +96,7 @@ function SideBar() {
                         // when search is not active then only the other users would be shown
                         onlineUsers?.includes(user._id) &&
                         <div className='relative rounded-full shadow-gray-500 bg-white shadow-lg flex justify-center items-center mt-[10px] cursor-pointer' onClick={() => dispatch(setSelectedUser(user))}>
+                            {/* jisko bhi choose krenge wo selected user ke yha chala jayega */}
                             <div className='w-[60px] h-[60px]   rounded-full overflow-hidden flex justify-center items-center '>
                                 <img src={user.image || dp} alt="" className='h-[100%]' />
                             </div>
