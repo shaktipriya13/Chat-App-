@@ -9,7 +9,10 @@ const conversationSchema = new mongoose.Schema({
     ],
     messages: [
         // messages is also an array of strings
-        { type: String }
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Message"
+        }
     ]
 }, { timestamps: true })
 
