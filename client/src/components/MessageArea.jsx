@@ -12,8 +12,8 @@ import { RiSendPlane2Fill } from "react-icons/ri";
 import EmojiPicker from 'emoji-picker-react';
 
 
-import SenderMessage from './SenderMessage';
-import ReceiverMessage from './ReceiverMessage';
+import SenderMessage from './SenderMessage.jsx';
+import ReceiverMessage from './ReceiverMessage.jsx';
 import axios from 'axios';
 import { serverUrl } from '../main';
 import { setMessages } from '../redux/message.slice.js';
