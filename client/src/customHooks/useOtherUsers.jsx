@@ -1,3 +1,5 @@
+// custom hook for getting details of other users
+
 // this custom hook will help in getting the data of other users
 
 import { useEffect } from "react"; // to perform a task when component mounts

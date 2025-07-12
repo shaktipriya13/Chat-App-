@@ -4,12 +4,14 @@
 // configureStore fxn creates our store
 
 // in store.js we store diff diff slices ka data
+
 import { configureStore } from "@reduxjs/toolkit"
 import userSlice from "./user.slice.js"
-// import messageSlice from "./messageSlice"
+import messageSlice from "./message.slice.js"
+
 export const store = configureStore({
     reducer: {
         user: userSlice,
-        // message: messageSlice
+        message: messageSlice
     }
 })
