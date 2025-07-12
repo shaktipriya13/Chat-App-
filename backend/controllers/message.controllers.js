@@ -54,7 +54,7 @@ export const sendMessage = async (req, res) => {
     }
 }
 
-export const getMessages = async (req, res) => {
+export const useMessages = async (req, res) => {
     // This controller is used get the msgs of the conversation
     try {
         let sender = req.userId;

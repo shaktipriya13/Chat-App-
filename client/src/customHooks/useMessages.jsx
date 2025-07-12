@@ -1,17 +1,17 @@
 import axios from "axios"
 import { useEffect } from "react"
-import { serverUrl } from "../main"
+import { serverUrl } from "../main.jsx"
 import { useDispatch, useSelector } from "react-redux"
 import { setOtherUsers, setUserData } from "../redux/user.slice.js"
 import { setMessages } from "../redux/message.slice.js"
 
-const getMessage = () => {
+const useMessage = () => {
     let dispatch = useDispatch()
     let { userData, selectedUser } = useSelector(state => state.user)
     useEffect(() => {
         const fetchMessages = async () => {
             try {
-                let result = await axios.get(`${serverUrl}/api/message/get/${selectedUser._id}`, { withCredentials: true })
+                let result = await axios.get(`${serverUrl}/api/v1/message/get/${selectedUser._id}`, { withCredentials: true })
                 dispatch(setMessages(result.data))
             } catch (error) {
                 console.log(error)
@@ -21,4 +21,4 @@ const getMessage = () => {
     }, [selectedUser, userData])
 }
 
-export default getMessage
+export default useMessage

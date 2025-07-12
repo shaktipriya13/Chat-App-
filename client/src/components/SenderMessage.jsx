@@ -1,3 +1,4 @@
+// This component decides how the senderMessage componnt looks like
 import React, { useEffect, useRef } from 'react'
 import dp from "../assets/dp.jpg"
 import { useSelector } from 'react-redux'

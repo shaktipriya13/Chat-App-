@@ -29,7 +29,8 @@ function MessageArea() {
     const handleImage = (e) => {
         let file = e.target.files[0]
         setBackendImage(file)
-        setFrontendImage(URL.createObjectURL(file))
+        setFrontendImage(URL.createObjectURL(file))//It creates a temporary URL for the image file you just selected from your computer, and displays it immediately in the browser before uploading to the backend/cloud. this just uploads image for the previw
+        // URL is a built-in browser object provided by JavaScript.
     }
     const handleSendMessage = async (e) => {
         e.preventDefault()
@@ -37,12 +38,15 @@ function MessageArea() {
             return
         }
         try {
-            let formData = new FormData()
+            let formData = new FormData();//we are creating form data bcoz we also need to send the image
             formData.append("message", input)
             if (backendImage) {
                 formData.append("image", backendImage)
             }
-            let result = await axios.post(`${serverUrl}/api/message/send/${selectedUser._id}`, formData, { withCredentials: true })
+            let result = await axios.post(`${serverUrl}/api/v1/message/send/${selectedUser._id}`, formData, {
+                // jis user se bat kr rhe is the selected user , uski id we are considering here
+                withCredentials: true
+            })
             dispatch(setMessages([...messages, result.data]))
             setInput("")
             setFrontendImage(null)
