@@ -3,10 +3,15 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import dp from "../assets/dp.jpg"
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedUser } from '../redux/user.slice.js';
+
+
+//icons from react-icons
 import { RiEmojiStickerLine } from "react-icons/ri";
 import { FaImages } from "react-icons/fa6";
 import { RiSendPlane2Fill } from "react-icons/ri";
 import EmojiPicker from 'emoji-picker-react';
+
+
 import SenderMessage from './SenderMessage';
 import ReceiverMessage from './ReceiverMessage';
 import axios from 'axios';
@@ -48,6 +53,9 @@ function MessageArea() {
     }
     const onEmojiClick = (emojiData) => {
         setInput(prevInput => prevInput + emojiData.emoji)
+        // emojiData is an object automatically passed by the EmojiPicker library when you click on an emoji
+        // Inside that object, there's a key called .emoji — which contains the actual emoji character you clicked.
+
         setShowPicker(false)
     }
     useEffect(() => {
@@ -74,7 +82,9 @@ function MessageArea() {
 
                     <div className='w-full h-[70%] flex flex-col py-[30px]  px-[20px] overflow-auto gap-[20px] '>
 
-                        {showPicker && <div className='absolute bottom-[120px] left-[20px]'><EmojiPicker width={250} height={350} className='shadow-lg z-[100]' onEmojiClick={onEmojiClick} /></div>}
+                        {/* following means: if showpicker is true then only the emojis are displayed else not */}
+                        {showPicker && <div className='absolute  bottom-[120px] left-[20px]'><EmojiPicker width={250} height={350} theme="dark" className='shadow-lg z-[100]' onEmojiClick={onEmojiClick} /></div>}
+                        {/* <EmojiPicker onEmojiClick={onEmojiClick} />: means Whenever an emoji is clicked, the onEmojiClick() function you wrote gets called. */}
 
                         {messages && messages.map((mess) => (
                             mess.sender == userData._id ? <SenderMessage image={mess.image} message={mess.message} /> : <ReceiverMessage image={mess.image} message={mess.message} />
@@ -89,6 +99,7 @@ function MessageArea() {
                 <form className='w-[95%] lg:w-[70%] h-[60px] bg-[rgb(23,151,194)] shadow-gray-400 shadow-lg rounded-full flex items-center gap-[20px] px-[20px] relative' onSubmit={handleSendMessage}>
 
                     <div onClick={() => setShowPicker(prev => !prev)}>
+                        {/* value of setShowPicker will toggle as we click it */}
                         <RiEmojiStickerLine className='w-[25px] h-[25px] text-white cursor-pointer' />
                     </div>
                     <input type="file" accept="image/*" ref={image} hidden onChange={handleImage} />

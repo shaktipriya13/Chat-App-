@@ -55,14 +55,26 @@ export const sendMessage = async (req, res) => {
 }
 
 export const getMessages = async (req, res) => {
+    // This controller is used get the msgs of the conversation
     try {
-        let sender = req.userId
-        let { receiver } = req.params
-        let conversation = await Conversation.findOne({
+        let sender = req.userId;
+        let { receiver } = req.params;
+        // with braces {}:"From req.params, extract only the receiver key and assign it directly to a variable named receiver.
+        // without: Assign the whole object req.params to receiver.
+        let conversation = await Conversation.findOne({//we find the conversation first
             partcipants: { $all: [sender, receiver] }
-        }).populate("messages")
+        }).populate("messages")//Mongoose automatically fetches the actual message documents from the Message collection. Replaces messages array of IDs with actual message documents. eg:
+        // {
+        //     partcipants: ['Aditi', 'Riya'],
+        //         messages: [
+        //             { _id: '65b2e1...', message: "Hare Krishna", sender: "...", ... },
+        //             { _id: '65b2e2...', message: "Radhe Radhe", sender: "...", ... }
+        //         ]
+        // }
+
 
         return res.status(200).json(conversation?.messages)
+
     } catch (error) {
         return res.status(500).json({ message: `get Message error ${error}` })
     }
