@@ -14,19 +14,23 @@ const userSlice = createSlice({
     initialState: {
         // initialState me we can make many states using commas
         userData: null,
-
+        otherUsers: null//this will store data of other users
     },
     reducers: {//reducer are fxns that change the value of declared states in initialState
         setUserData: (state, action) => {
             state.userData = action.payload;//eg : we sent setUserDate("shakti")
             // state ke through we access data stored in that state
         },
+        setOtherUsers: (state, action) => {
+            // this reducer will change the data in state of 'otherUsers'
+            state.otherUsers = action.payload;
+        },
     }
 })
 
 
 // first we export all reducers
-export const { setUserData } = userSlice.actions;//it means we can use setUserData in our components to update the state from userSlice to perform some action
+export const { setUserData,setOtherUsers} = userSlice.actions;//it means we can use setUserData in our components to update the state from userSlice to perform some action
 
 // then we export all our slice reducers
 export default userSlice.reducer;//it means we can use userSlice.reducer in our store to create the store

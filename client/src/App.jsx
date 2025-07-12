@@ -6,9 +6,13 @@ import useCurrentUser from './customHooks/useCurrentUser';
 import { useSelector } from 'react-redux';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
+import useOtherUsers from './customHooks/useOtherUsers';
 
 function App() {
+  // redux: reducers called:
   useCurrentUser();
+  useOtherUsers();//we called this as this reducer helps to get all other users
+
   let { userData } = useSelector(state => state.user);//get the data from the user slice using useSelector hook
   console.log("Redux userData in App:", userData);
   //* This hook helps you fetch the current user from the backend and save them to Redux so your whole app knows who is logged in.

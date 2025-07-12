@@ -34,7 +34,7 @@ export const editprofile = async (req, res) => {
 
         let user = await User.findByIdAndUpdate(req.userId, {
             name, image
-        });
+        }, { new: true });
 
         if (!user) {
             return res.status(400).json(message, "User not found.");
@@ -43,5 +43,19 @@ export const editprofile = async (req, res) => {
         return res.status(200).json(user);
     } catch (error) {
         return res.status(500).json(`profile error ${error}`);
+    }
+}
+
+
+export const getOtherUsers = async (req, res) => {
+    try {
+        // to  get other users, the users must not be equal to the current user
+        let users = await User.find({
+            _id: { $ne: req.userId }//the userId we would be getting from the isAuth middleware
+        }).select("-password");
+
+        return res.status(200).json(users);
+    } catch (err) {
+        return res.status(500).json(`Error in getting other users: ${error}`);
     }
 }
