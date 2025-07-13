@@ -6,6 +6,7 @@ import authRouter from './routes/auth.route.js';
 import cookieParser from 'cookie-parser';
 import userRouter from './routes/user.route.js';
 import msgRouter from './routes/message.route.js';
+import { app, server } from './socket/socket.js';
 
 dotenv.config();
 connectDB();
@@ -13,8 +14,9 @@ connectDB();
 const port = process.env.PORT || 8080;
 
 //making simple server
-const app = express();
+// const app = express();
 
+// we are importing app server from socekt.io
 app.use(cors({
     origin: ['http://localhost:5173', 'http://localhost:5174'], // Allow Vite React frontend
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
@@ -29,7 +31,8 @@ app.use('/api/v1/user', userRouter);
 app.use('/api/v1/msg', msgRouter);
 
 
-app.listen(port, () => {
+// here we will not be listengin node server but the socket.io server
+server.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 })
 
