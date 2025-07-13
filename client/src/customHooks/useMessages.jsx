@@ -3,7 +3,7 @@ import axios from "axios"
 import { useEffect } from "react"
 import { serverUrl } from "../main.jsx"
 import { useDispatch, useSelector } from "react-redux"
-import { setOtherUsers, setUserData } from "../redux/user.slice.js"
+// import { setOtherUsers, setUserData } from "../redux/user.slice.js"
 import { setMessages } from "../redux/message.slice.js"
 
 const useMessage = () => {
@@ -19,7 +19,7 @@ const useMessage = () => {
             }
         }
         fetchMessages()
-    }, [selectedUser, userData])
+    }, [dispatch, selectedUser, userData])
 }
 
 export default useMessage

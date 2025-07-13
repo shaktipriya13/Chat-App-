@@ -47,7 +47,7 @@ function MessageArea() {
                 // jis user se bat kr rhe is the selected user , uski id we are considering here
                 withCredentials: true
             })
-            dispatch(setMessages([...messages, result.data]))
+            dispatch(setMessages([...messages, result.data]))//... It spreads each item from messages individually into the new array and adds newMessage at the end.
             setInput("")
             setFrontendImage(null)
             setBackendImage(null)
@@ -90,6 +90,8 @@ function MessageArea() {
                         {showPicker && <div className='absolute  bottom-[120px] left-[20px]'><EmojiPicker width={250} height={350} theme="dark" className='shadow-lg z-[100]' onEmojiClick={onEmojiClick} /></div>}
                         {/* <EmojiPicker onEmojiClick={onEmojiClick} />: means Whenever an emoji is clicked, the onEmojiClick() function you wrote gets called. */}
 
+
+{/* Below line decides the color of sender and receiver msg box wil be diff. */}
                         {messages && messages.map((mess) => (
                             mess.sender == userData._id ? <SenderMessage image={mess.image} message={mess.message} /> : <ReceiverMessage image={mess.image} message={mess.message} />
                         ))}

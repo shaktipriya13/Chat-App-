@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { serverUrl } from '../main';
 import { useDispatch } from 'react-redux';
-import { setUserData } from '../redux/user.slice.js';
+import { setUserData,setSelectedUser } from '../redux/user.slice.js';
 
 function Login() {
     const navigate = useNavigate();
@@ -23,6 +23,7 @@ function Login() {
                 email, password
             }, { withCredentials: true });
             dispatch(setUserData(result.data));
+            dispatch(setSelectedUser(null));
             console.log("Dispatched userData:", result.data);
             navigate("/");
             setEmail("");
