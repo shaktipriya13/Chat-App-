@@ -15,7 +15,10 @@ const userSlice = createSlice({
         // initialState me we can make many states using commas
         userData: null,
         otherUsers: null,//this will store data of other users
-        selectedUser: null
+        selectedUser: null,
+        socket: null,
+        onlineUsers: null,
+        searchData: null
     },
     reducers: {//reducer are fxns that change the value of declared states in initialState
         setUserData: (state, action) => {
@@ -30,12 +33,21 @@ const userSlice = createSlice({
             // this reducer will change the state of selected user from the sidebar, only their info. will shown on the message area
             state.otherUsers = action.payload;
         },
+        setSocket: (state, action) => {
+            state.socket = action.payload;
+        },
+        setOnlineUsers: (state, action) => {
+            state.onlineUsers = action.payload;
+        },
+        setSearchData: (state, action) => {
+            state.searchData = action.payload;
+        }
     }
 })
 
 
 // first we export all reducers
-export const { setUserData, setOtherUsers, selectedUser } = userSlice.actions;//it means we can use setUserData in our components to update the state from userSlice to perform some action
+export const { setUserData, setOtherUsers, setSelectedUser, setSocket, setOnlineUsers, setSearchData } = userSlice.actions;//it means we can use setUserData in our components to update the state from userSlice to perform some action
 
 // then we export all our slice reducers
 export default userSlice.reducer;//it means we can use userSlice.reducer in our store to create the store

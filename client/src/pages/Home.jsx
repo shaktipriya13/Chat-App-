@@ -8,7 +8,7 @@ import useMessage from '../customHooks/useMessages.jsx'
 function Home() {
     let { selectedUser } = useSelector(state => state.user);
     useMessage();// inside any component to fetch messages when user is selected
-    useMessage()
+    // useMessage()
     return (
         <div className='w-full h-[100vh] flex  overflow-hidden'>
             {/* {overflow - hidden}:"If something overflows the box, hide it — don’t show the extra content." */}
