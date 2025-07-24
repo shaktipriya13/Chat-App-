@@ -4,8 +4,7 @@
 
 ## Overview
 
-PingDrop is a modern, real-time chat application built using the **MERN stack** (MongoDB, Express.js, React, Node.js) and **Socket.io** for seamless, WhatsApp-style 1:1 messaging. This full-stack project, designed for 2025, integrates advanced features like real-time messaging, live typing indicators, online status updates, and image uploads via **Cloudinary** . With a fully responsive design and robust user authentication, PingDrop is an excellent addition to any developer's portfolio, showcasing expertise in real-time web development and the MERN stack.
-
+PingDrop is a modern, real-time chat application built using the **MERN stack** (MongoDB, Express.js, React, Node.js) and **Socket.io** for seamless, WhatsApp-style 1:1 messaging. This full-stack project, designed for 2025, integrates advanced features like real-time messaging, live typing indicators, online status updates, and image uploads via **Cloudinary** . 
 The application includes a sleek frontend powered by **React** and **Redux Toolkit** , a secure backend with **Node.js** and **Express.js** , and a scalable database with **MongoDB** and **Mongoose** . Deployed on **Render** for both frontend and backend, and using **MongoDB Atlas** for the database, PingDrop delivers a high-performance, real-time chat experience.
 
 ---
